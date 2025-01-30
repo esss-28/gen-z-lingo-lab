@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import SlangCard from "@/components/SlangCard";
-import AddSlangButton from "@/components/AddSlangButton";
+import AddSlangForm from "@/components/AddSlangForm";
 
 // Temporary data - will be replaced with API calls
 const MOCK_SLANG = [
@@ -53,7 +53,9 @@ const Index = () => {
         ))}
       </div>
 
-      <AddSlangButton />
+      <div className="max-w-2xl mx-auto pt-8">
+        <AddSlangForm />
+      </div>
     </div>
   );
 };
