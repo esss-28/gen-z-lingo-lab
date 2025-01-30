@@ -9,7 +9,68 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      slang_terms: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          definition: string
+          example: string
+          id: string
+          status: Database["public"]["Enums"]["term_status"] | null
+          votes_count: number | null
+          word: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          definition: string
+          example: string
+          id?: string
+          status?: Database["public"]["Enums"]["term_status"] | null
+          votes_count?: number | null
+          word: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          definition?: string
+          example?: string
+          id?: string
+          status?: Database["public"]["Enums"]["term_status"] | null
+          votes_count?: number | null
+          word?: string
+        }
+        Relationships: []
+      }
+      votes: {
+        Row: {
+          created_at: string
+          id: string
+          term_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          term_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          term_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "votes_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "slang_terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +79,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      term_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
